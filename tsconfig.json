@@ -1,0 +1,9 @@
+{
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "removeComments": true,
+    "target": "ES2019",
+    "module": "CommonJS"
+  },
+  "compileOnSave": true
+}
