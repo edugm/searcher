@@ -3,7 +3,7 @@ export interface List {
 }
 
 export default class Searcher {
-    private teams = new Map();
+    private items = new Map();
 
     constructor(
         private list: List,
@@ -14,23 +14,23 @@ export default class Searcher {
     }
 
     private initTeamCounters () {
-        for(const team of Object.keys(this.list)) {
-            this.teams.set(team, 0);
+        for(const item of Object.keys(this.list)) {
+            this.items.set(item, 0);
         }
     }
 
     private fillTeamCounters() {
-        for (const player of this.searchers) {
-            Object.keys(this.list).map((teamName) => (
-                this.teams.set(teamName, (this.teams.get(teamName) + (
-                    this.list[teamName].includes(player) ? 1 : 0
+        for (const searchedItem of this.searchers) {
+            Object.keys(this.list).map((item) => (
+                this.items.set(item, (this.items.get(item) + (
+                    this.list[item].includes(searchedItem) ? 1 : 0
                 )))
             ));
         }
     }
 
     public result()  {
-        return Object.keys(Object.fromEntries(this.teams))
-            .filter((team) => this.teams.get(team) === this.searchers.length)
+        return Object.keys(Object.fromEntries(this.items))
+            .filter((item) => this.items.get(item) === this.searchers.length)
     }
 }
