@@ -1,14 +1,16 @@
 import List from "./list.interface";
 
-export const SearcherFunctor = (list: List, searchers: string[]) => {
+export const buildSearcherFunctor = (list: List) => {
 	const items = new Map(Object.keys(list).map((i) => [i, 0]));
-	fillTeamCounters();
 
-	return Object.keys(Object.fromEntries(items)).filter(
-		(item) => items.get(item) === searchers.length
-	);
+	return (searchers: string[]) => {
+		fillTeamCounters(searchers);
+		return Object.keys(Object.fromEntries(items)).filter(
+			(item) => items.get(item) === searchers.length
+		);
+	};
 
-	function fillTeamCounters() {
+	function fillTeamCounters(searchers: string[]) {
 		for (const searchedItem of searchers) {
 			Object.keys(list).map((item) =>
 				items.set(
